@@ -152,15 +152,13 @@ func TestGetByClient(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, len(parcels), len(storedParcels))
 	// check
-	for _, parcel := range storedParcels {
+	for i, parcel := range storedParcels {
 		// в parcelMap лежат добавленные посылки, ключ - идентификатор посылки, значение - сама посылка
 		// убедитесь, что все посылки из storedParcels есть в parcelMap
 		// убедитесь, что значения полей полученных посылок заполнены верно
 		id := parcel.Number
 		require.Equal(t, parcel, parcelMap[id])
-		require.Equal(t, parcelMap[id].Client, parcel.Client)
-		require.Equal(t, parcelMap[id].Address, parcel.Address)
-		require.Equal(t, parcelMap[id].Status, parcel.Status)
-		require.Equal(t, parcelMap[id].CreatedAt, parcel.CreatedAt)
+		require.Equal(t, parcels[i], parcel)
+
 	}
 }
